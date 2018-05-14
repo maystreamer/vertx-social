@@ -10,10 +10,10 @@ import io.vertx.reactivex.core.Vertx;
 import io.vertx.reactivex.core.buffer.Buffer;
 import io.vertx.reactivex.ext.web.RoutingContext;
 
-@RequestMapping(path = "/ping")
-public class PingHandler extends BaseHandler {
+@RequestMapping(path = "/status")
+public class ServerStatusHandler extends BaseHandler {
 
-    public PingHandler(Vertx vertx) {
+    public ServerStatusHandler(Vertx vertx) {
         super(vertx);
     }
 

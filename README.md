@@ -14,8 +14,10 @@ For runnning this, you will need
 
 ## Brief
 This sample application make use of [Vertx-Boot](https://github.com/greyseal/vertx-boot) library to expose a rest API **/runner/api/ping**
-- **HttpServerVerticle**       -> HTTP Server verticle to handle incoming HTTP Requests.
-- **PingHandler**              -> Sample handler to send a "OK" Json response.
+- **HttpServerVerticle**       -> Default verticle from the vertx-boot library. Can be extened for the functionality.
+- **MessagingVerticle**        -> Sample Messaging verticle to send messages (no functionality for now).
+- **ServerStatusHandler**      -> Sample handler to send a "OK" Json response.
+- **PingHandler**              -> Default handler from the vertx-boot library to send a "OK" Json response.
 
 ## Running the app
 
@@ -28,8 +30,18 @@ For running the app, (IDE used here is IntelliJ)
   * **Environment variables**: ENV=dev 
  <br /><br /> After setting the variables, Run/Debug the project.<br />
 - If app starts successfully, then try <br />
+**Type:** *GET http://localhost:8080/runner/api/status* <br />
+**Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479fadddda* <br />
+
+Response<br />
+```
+{
+    "status": "OK"
+}
+```
+Default rest API can also be tried... <br /><br />
 **Type:** *GET http://localhost:8080/runner/api/ping* <br />
-**Headers:** *Content-Type: application/json*;  *CORRELATION-ID: c1d887063c3e492b9951b0479fadddda* <br />
+**Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479fadddda* <br />
 
 Response<br />
 ```

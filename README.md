@@ -28,8 +28,9 @@ For running the app, (IDE used here is IntelliJ)
   * **VM options**: -Dlogback.configurationFile=file:../vertx-social/src/main/resources/logback.xml
   * **Program arguments**: -run com.greyseal.vertx.boot.verticle.MainVerticle -conf ../vertx-social/src/main/resources/appConfig.json 
   * **Environment variables**: ENV=dev 
- <br /><br /> After setting the variables, Run/Debug the project.<br />
-- If app starts successfully, then try <br />
+ <br /><br /> 
+
+After setting the variables, Run/Debug the project. If app starts successfully, then try <br /><br /> 
 **Type:** *GET http://localhost:8080/runner/api/status* <br />
 **Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479fadddda* <br />
 
@@ -50,6 +51,75 @@ Response<br />
 }
 ```
 That's it.
+
+## Vertx-Social usage
+- Currently added support for LinkedIn/Gitgub apis. To run/debug...<br  /><br  />
+* To get **Authorization** url <br /><br />
+**Type:** *POST http://localhost:8080/runner/api/social/authorizationurl?provider=LINKEDIN* <br />
+**Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479faddddu* <br />
+**Request body:**
+ ```
+ {
+   "scopes": [
+     "r_basicprofile",
+     "r_emailaddress",
+     "rw_company_admin",
+     "w_share"
+   ],
+   "redirect_uri": "{redirect_uri}",
+   "state": "STATE"
+ }
+ ```
+ **Response:**
+ ```
+ {
+    "authorizationURL": "{authorization_url}"
+}
+ ```
+Click on **Authorization url** to get the Authorization code. <br /> <br />
+* To get **Access Token** url <br /><br />
+**Type:** *POST http://localhost:8080/runner/api/social/accesstoken?provider=LINKEDIN* <br />
+**Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479faddddu* <br />
+**Request body:**
+ ```
+{
+"code":"{authorization_code}",
+"redirect_uri":"{redirect_uri}"
+}
+ ```
+ **Response:**
+ ```
+{
+    "access_token": "{access_token}",
+    "expires_in": 5163999,
+    "expires_at": 1561910752077
+}
+ ```
+Get the **access_token** and pass it to the concrete apis
+* To get **Linkedin user profile** url <br /><br />
+**Type:** *POST http://localhost:8080/runner/api/social/profile?provider=LINKEDIN* <br />
+**Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479faddddu* <br />
+**Request body:**
+ ```
+{
+"access_token":"{access_token}"
+}
+ ```
+ **Response:**
+ ```
+{
+    "firstName": "ABC",
+    "headline": "Software Engineer",
+    "id": "8mAy5C1epf",
+    "lastName": "XYZ",
+    "siteStandardProfileRequest": {
+        "url": "{url}"
+    }
+}
+ ```
+ 
+Try same for **Github** by updating provider=LINKEDIN t0 provider=GITHUB
+
 
 ## Built With
 

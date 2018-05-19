@@ -38,6 +38,7 @@ dependencies {
     compile "io.vertx:vertx-web:${vertxVersion}",
             "io.vertx:vertx-rx-java2:${vertxVersion}",
             "io.vertx:vertx-service-proxy:${vertxVersion}",
+            "io.vertx:vertx-auth-oauth2:${vertxVersion}",
             "ch.qos.logback:logback-classic:${logbackVersion}",
             "ch.qos.logback:logback-core:${logbackVersion}",
             "org.slf4j:slf4j-api:${slf4jVersion}",

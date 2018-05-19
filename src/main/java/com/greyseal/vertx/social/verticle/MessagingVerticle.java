@@ -5,7 +5,7 @@ import com.greyseal.vertx.boot.annotation.Verticle;
 import com.greyseal.vertx.boot.verticle.BaseVerticle;
 import io.vertx.core.Future;
 
-@Verticle(type = VerticleType.STANDARD, configuration = "messagingVerticle")
+@Verticle(type = VerticleType.STANDARD, configuration = "messaging_verticle")
 public class MessagingVerticle extends BaseVerticle {
 
     @Override

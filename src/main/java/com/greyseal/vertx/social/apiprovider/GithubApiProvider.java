@@ -10,14 +10,13 @@ import io.vertx.reactivex.core.Vertx;
 public class GithubApiProvider extends AbstractApiProvider {
     private static final String CLIENT_ID = ApiProviderConfigHelper.getClientId("github");
     private static final String CLIENT_SECRET = ApiProviderConfigHelper.getClientSecret("github");
-    private static final ApiProviderName API_PROVIDER_NAME = ApiProviderName.GITHUB;
 
 
-    private static final String BASE_URL = "https://api.github.com";
+    private static final String BASE_URL = ApiProviderConfigHelper.getBaseURL("github");
     private static final String USER_PROFILE_URL = String.join("/", BASE_URL, "user");
 
     public GithubApiProvider(final Vertx vertx) {
-        super(vertx, CLIENT_ID, CLIENT_SECRET, API_PROVIDER_NAME);
+        super(vertx, CLIENT_ID, CLIENT_SECRET, ApiProviderName.GITHUB);
     }
 
     @Override

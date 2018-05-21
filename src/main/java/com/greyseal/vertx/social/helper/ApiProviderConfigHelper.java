@@ -18,4 +18,16 @@ public class ApiProviderConfigHelper {
     public static String getClientSecret(final String providerName) {
         return get(providerName).getString("client_secret");
     }
+
+    public static String getAppId(final String providerName) {
+        return get(providerName).getString("app_id");
+    }
+
+    public static String getAppSecret(final String providerName) {
+        return get(providerName).getString("app_secret");
+    }
+
+    public static String getBaseURL(final String providerName) {
+        return get(providerName).getString("base_url");
+    }
 }

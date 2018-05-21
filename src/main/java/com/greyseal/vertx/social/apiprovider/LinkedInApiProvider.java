@@ -10,15 +10,14 @@ import io.vertx.reactivex.core.Vertx;
 public class LinkedInApiProvider extends AbstractApiProvider {
     private static final String CLIENT_ID = ApiProviderConfigHelper.getClientId("linkedin");
     private static final String CLIENT_SECRET = ApiProviderConfigHelper.getClientSecret("linkedin");
-    private static final ApiProviderName API_PROVIDER_NAME = ApiProviderName.LINKEDIN;
 
-    private static final String BASE_URL = "https://api.linkedin.com/v1";
+    private static final String BASE_URL = ApiProviderConfigHelper.getBaseURL("linkedin");
     private static final String BASIC_PROFILE_URL = String.join("/", BASE_URL, "people/~?format=json");
     private static final String COMPANY_SHARE_URL = String.join("/", BASE_URL, "companies/:id/shares?format=json");
     private static final String PEOPLE_SHARE_URL = String.join("/", BASE_URL, "people/~/shares?format=json");
 
     public LinkedInApiProvider(final Vertx vertx) {
-        super(vertx, CLIENT_ID, CLIENT_SECRET, API_PROVIDER_NAME);
+        super(vertx, CLIENT_ID, CLIENT_SECRET, ApiProviderName.LINKEDIN);
     }
 
     @Override

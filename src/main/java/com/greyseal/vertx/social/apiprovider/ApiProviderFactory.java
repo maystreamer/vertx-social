@@ -33,7 +33,7 @@ public class ApiProviderFactory {
             clazz = apiResourceMapping.get(name);
             apiProvider = clazz.getDeclaredConstructor(Vertx.class).newInstance(vertx);
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
         if (null == apiProvider) {
             throw new ClassNotFoundException(String.join(" ", "Class ", name, " not found"));

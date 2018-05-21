@@ -21,7 +21,7 @@ public class GithubApiProvider extends AbstractApiProvider {
     }
 
     @Override
-    public <JsonObject> JsonObject doPost(JsonObject data) {
+    public Future<JsonObject> doPost(JsonObject data) {
         return null;
     }
 

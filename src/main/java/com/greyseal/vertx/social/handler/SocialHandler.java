@@ -67,4 +67,23 @@ public class SocialHandler extends BaseHandler {
             event.fail(ex);
         }
     }
+
+
+    @RequestMapping(path = "/comment", method = HttpMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void doPost(RoutingContext event) {
+        try {
+            final JsonObject data = event.getBodyAsJson();
+            final String providerName = event.request().getParam("provider");
+            IApiProvider.loadApiProvider(providerName, event.vertx()).doPost(data).setHandler(handler -> {
+                if (!handler.failed()) {
+                    event.setBody(Buffer.buffer(handler.result().toString()));
+                    event.next();
+                } else {
+                    event.fail(handler.cause());
+                }
+            });
+        } catch (Exception ex) {
+            event.fail(ex);
+        }
+    }
 }

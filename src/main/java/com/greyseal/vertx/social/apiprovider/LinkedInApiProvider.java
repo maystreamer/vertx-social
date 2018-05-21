@@ -14,16 +14,27 @@ public class LinkedInApiProvider extends AbstractApiProvider {
 
     private static final String BASE_URL = "https://api.linkedin.com/v1";
     private static final String BASIC_PROFILE_URL = String.join("/", BASE_URL, "people/~?format=json");
-    private static final String COMPANY_SHARE_URL = String.join("/", BASE_URL, "/companies/:id/shares?format=json");
-    private static final String PEOPLE_SHARE_URL = String.join("/", BASE_URL, "/people/~/shares?format=json");
+    private static final String COMPANY_SHARE_URL = String.join("/", BASE_URL, "companies/:id/shares?format=json");
+    private static final String PEOPLE_SHARE_URL = String.join("/", BASE_URL, "people/~/shares?format=json");
 
     public LinkedInApiProvider(final Vertx vertx) {
         super(vertx, CLIENT_ID, CLIENT_SECRET, API_PROVIDER_NAME);
     }
 
     @Override
-    public <JsonObject> JsonObject doPost(JsonObject data) {
-        return null;
+    public Future<JsonObject> doPost(final JsonObject payload) {
+        final JsonObject _params = payload.copy();
+        long companyId = _params.getLong("company_id");
+        String _url = null;
+        if (companyId > 0) {
+            _url = COMPANY_SHARE_URL;
+        } else {
+            _url = PEOPLE_SHARE_URL;
+        }
+        final String accessToken = getAccessToken(_params);
+        _params.remove("access_token");
+        _params.remove("company_id");
+        return super.doPost(accessToken, _url, getHeaders(), _params);
     }
 
     @Override
@@ -32,9 +43,9 @@ public class LinkedInApiProvider extends AbstractApiProvider {
         return super.getOAuth2AccessToken(_params);
     }
 
-    public Future<JsonObject> doGetProfile(final JsonObject accessToken) {
-        final JsonObject _accessToken = accessToken.copy();
-        return super.doGetProfile(_accessToken.getString("access_token"), BASIC_PROFILE_URL, getHeaders());
+    public Future<JsonObject> doGetProfile(final JsonObject data) {
+        final JsonObject _data = data.copy();
+        return super.doGetProfile(getAccessToken(_data), BASIC_PROFILE_URL, getHeaders());
     }
 
     protected JsonObject getHeaders() {

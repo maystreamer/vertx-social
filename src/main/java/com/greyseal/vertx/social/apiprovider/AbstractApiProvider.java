@@ -64,7 +64,7 @@ public abstract class AbstractApiProvider implements IApiProvider {
         return future;
     }
 
-    public Future<JsonObject> doFetch(final AccessToken accessToken, final HttpMethod method, final String resource, final JsonObject headers, final Buffer payload) {
+    public Future<JsonObject> doRequest(final AccessToken accessToken, final HttpMethod method, final String resource, final JsonObject headers, final Buffer payload) {
         Future<JsonObject> future = Future.future();
         accessToken.rxFetch(method, resource, headers, payload != null ? payload : Buffer.buffer()).subscribe(response -> {
             future.complete(response.body().toJsonObject());
@@ -79,7 +79,7 @@ public abstract class AbstractApiProvider implements IApiProvider {
         decodeOAuth2AccessToken(accessToken).setHandler(response -> {
             if (!response.failed()) {
                 final AccessToken _accessToken = response.result();
-                doFetch(_accessToken, HttpMethod.GET, resourceURL, headers, null).setHandler(handler -> {
+                doRequest(_accessToken, HttpMethod.GET, resourceURL, headers, null).setHandler(handler -> {
                     if (!handler.failed()) {
                         future.complete(handler.result());
                     } else {
@@ -91,6 +91,29 @@ public abstract class AbstractApiProvider implements IApiProvider {
             }
         });
         return future;
+    }
+
+    public Future<JsonObject> doPost(final String accessToken, final String resourceURL, final JsonObject headers, final JsonObject payload) {
+        Future<JsonObject> future = Future.future();
+        decodeOAuth2AccessToken(accessToken).setHandler(response -> {
+            if (!response.failed()) {
+                final AccessToken _accessToken = response.result();
+                doRequest(_accessToken, HttpMethod.POST, resourceURL, headers, Buffer.buffer(payload.toString())).setHandler(handler -> {
+                    if (!handler.failed()) {
+                        future.complete(handler.result());
+                    } else {
+                        future.fail(handler.cause());
+                    }
+                });
+            } else {
+                future.fail(response.cause());
+            }
+        });
+        return future;
+    }
+
+    public String getAccessToken(final JsonObject data) {
+        return data.getString("access_token");
     }
 
 }

@@ -32,7 +32,7 @@ public interface IApiProvider {
 
     public Future<JsonObject> getOAuth2AccessToken(final JsonObject params);
 
-    public <T> T doPost(final T data);
+    public Future<JsonObject> doPost(final JsonObject payload);
 
     public Future<JsonObject> doGetProfile(final JsonObject accessToken);
 }

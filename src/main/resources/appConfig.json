@@ -113,11 +113,18 @@
       {
         "linkedin": {
           "client_id": "",
-          "client_secret": ""
+          "client_secret": "",
+          "base_url": ""
         },
-        "github":{
+        "github": {
           "client_id": "",
-          "client_secret": ""
+          "client_secret": "",
+          "base_url": ""
+        },
+        "facebook": {
+          "app_id": "",
+          "app_secret": "",
+          "base_url": ""
         }
       }
     ]

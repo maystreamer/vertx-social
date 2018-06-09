@@ -53,7 +53,7 @@ Response<br />
 That's it.
 
 ## Vertx-Social usage
-- Currently added support for LinkedIn/Gitgub apis. To run/debug...<br  /><br  />
+- Currently added support for LinkedIn/Github apis. To run/debug...<br  /><br  />
 * To get **Authorization** url <br /><br />
 **Type:** *POST http://localhost:8080/runner/api/social/authorizationurl?provider=LINKEDIN* <br />
 **Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479faddddu* <br />

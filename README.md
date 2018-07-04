@@ -31,16 +31,6 @@ For running the app, (IDE used here is IntelliJ)
  <br /><br /> 
 
 After setting the variables, Run/Debug the project. If app starts successfully, then try <br /><br /> 
-**Type:** *GET http://localhost:8080/runner/api/status* <br />
-**Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479fadddda* <br />
-
-Response<br />
-```
-{
-    "status": "OK"
-}
-```
-Default rest API can also be tried... <br /><br />
 **Type:** *GET http://localhost:8080/runner/api/ping* <br />
 **Headers:** *Content-Type: application/json*;  *Trace-Id: c1d887063c3e492b9951b0479fadddda* <br />
 

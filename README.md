@@ -26,7 +26,7 @@ For running the app, (IDE used here is IntelliJ)
 - Once, changes are done in **appConfig.json**, add/edit Run/Debug Configurations for the project("vertx-social") and set:
   * **Main class**: com.greyseal.vertx.boot.AppLauncher
   * **VM options**: -Dlogback.configurationFile=file:../vertx-social/src/main/resources/logback.xml
-  * **Program arguments**: -run com.greyseal.vertx.boot.verticle.MainVerticle -conf ../vertx-social/src/main/resources/appConfig.json 
+  * **Program arguments**: run com.greyseal.vertx.boot.verticle.MainVerticle -conf ../vertx-social/src/main/resources/appConfig.json 
   * **Environment variables**: ENV=dev 
  <br /><br /> 
 
